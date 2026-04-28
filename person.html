@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Individual Salary Memo | SHSU Math &amp; Statistics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="page-person">
+    <div class="article-shell">
+      <header class="masthead">
+        <div>
+          <p class="journal-kicker">Working Research Memo</p>
+          <p class="journal-title">Individual Salary Record in Context</p>
+        </div>
+        <nav class="mastnav">
+          <a href="index.html">Department Memo</a>
+          <a class="active" href="person.html">Individual Records</a>
+        </nav>
+      </header>
+
+      <section class="browser-warning" role="status">
+        <strong>If the charts or live summary are blank, check the extracted folder.</strong>
+        The full dashboard needs <span>person.html</span>, the JavaScript files, and <span>data/analysis.js</span> in the same folder structure.
+        Open <span>index-standalone.html</span> for the one-file overview.
+      </section>
+
+      <section class="title-block">
+        <p class="section-kicker">Individual Salary Memo</p>
+        <h1 id="person-name">Individual Salary Record</h1>
+        <p id="person-subtitle" class="byline">The selected record loads from the SHSU math-department salary files when the dashboard scripts run.</p>
+      </section>
+
+      <section class="abstract-grid">
+        <article class="paper-panel abstract-panel">
+          <h2>Individual summary</h2>
+          <p id="profile-copy">
+            Search for a department member or open the default record to view salary history, purchasing-power change, department standing, college standing, university standing, and external benchmark context.
+          </p>
+        </article>
+        <aside class="paper-panel search-panel">
+          <h2>Record controls</h2>
+          <div class="interactive-block">
+            <label class="field-label" for="person-search">Search for a department member</label>
+            <div class="search-row">
+              <input id="person-search" list="people-list" placeholder="Type a name" />
+              <button id="open-person" type="button">Open</button>
+            </div>
+            <datalist id="people-list"></datalist>
+          </div>
+          <p class="search-note">
+            Department, college, and university comparisons come from SHSU salary files. State and national comparisons use institution-level monthly faculty salary benchmarks.
+          </p>
+        </aside>
+      </section>
+
+      <section class="metric-strip" id="person-metrics"></section>
+
+      <section class="paper-panel prose-panel">
+        <div class="figure-head">
+          <div>
+            <p class="section-kicker">Citable Summary</p>
+            <h2>Salary record in plain language</h2>
+          </div>
+        </div>
+        <p id="person-citable-copy"></p>
+        <ol id="person-case-list" class="finding-list"></ol>
+      </section>
+
+      <section class="paper-panel method-panel">
+        <div class="figure-head">
+          <div>
+            <p class="section-kicker">Method</p>
+            <h2>What each comparison is doing</h2>
+          </div>
+        </div>
+        <div class="method-grid">
+          <article>
+            <h3>Purchasing power</h3>
+            <p>The first figure indexes real salary to the first observed year. Values below 100 mean the real value of pay has fallen from that starting point.</p>
+          </article>
+          <article>
+            <h3>Relative standing</h3>
+            <p>The percentile charts show where the record sits inside math, COSET, and the full SHSU salary file in each year.</p>
+          </article>
+          <article>
+            <h3>Statistical distance</h3>
+            <p>The z-score heatmap shows how far each year sits from the department, college, and university medians.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="paper-panel figure-panel">
+        <div class="figure-head">
+          <div>
+            <p class="figure-number">Figure 1</p>
+            <h2>Purchasing power over time</h2>
+          </div>
+          <p class="figure-caption">
+            The first observed year is set to 100, so a drop below 100 shows lost purchasing power after inflation.
+          </p>
+        </div>
+        <details class="calc-note">
+          <summary>How this figure was calculated</summary>
+          <p>The selected salary and comparison medians were first converted into FY2025 dollars. Each line is then indexed so its first available year equals 100; values below 100 mean the salary buys less than it did in the starting year.</p>
+        </details>
+        <div id="person-purchasing-power-chart" class="figure-plot figure-hero"></div>
+      </section>
+
+      <section class="paper-panel figure-panel">
+        <div class="figure-head">
+          <div>
+            <p class="figure-number">Figure 2</p>
+            <h2>Inflation-adjusted annual salary against internal medians</h2>
+          </div>
+          <p class="figure-caption">
+            This places the selected real annual salary beside the internal medians used throughout the memo.
+          </p>
+        </div>
+        <details class="calc-note">
+          <summary>How this figure was calculated</summary>
+          <p>The selected annual base salary is converted into FY2025 dollars and plotted against the yearly median real base salary for the math department, COSET, and the full SHSU salary file.</p>
+        </details>
+        <div id="person-context-chart" class="figure-plot figure-hero"></div>
+      </section>
+
+      <section class="paper-panel figure-panel">
+        <div class="figure-head">
+          <div>
+            <p class="figure-number">Figure 3</p>
+            <h2>Monthly pay compared with internal and external benchmarks</h2>
+          </div>
+          <p class="figure-caption">
+            This compares the selected estimated monthly base salary with SHSU internal medians and outside peer benchmarks.
+          </p>
+        </div>
+        <details class="calc-note">
+          <summary>How this figure was calculated</summary>
+          <p>The selected monthly value is estimated as annual base salary divided by appointment months. Internal comparison lines use the same estimate for SHSU records; external peer lines use the official College Scorecard/IPEDS monthly faculty-salary benchmark.</p>
+        </details>
+        <div id="person-monthly-chart" class="figure-plot figure-hero"></div>
+      </section>
+
+      <section class="paper-panel figure-panel">
+        <div class="figure-head">
+          <div>
+            <p class="figure-number">Figure 4</p>
+            <h2>Percentile standing inside each internal comparison group</h2>
+          </div>
+          <p class="figure-caption">
+            These percentiles show where the person sat inside the department, the college, and the broader SHSU file in each year.
+          </p>
+        </div>
+        <details class="calc-note">
+          <summary>How this figure was calculated</summary>
+          <p>Percentile is calculated within each comparison group and fiscal year as the share of salaries less than or equal to the selected salary. For example, 70% means the record is at or above about 70% of that comparison group.</p>
+        </details>
+        <div id="person-percentile-chart" class="figure-plot figure-wide"></div>
+      </section>
+
+      <section class="paper-panel figure-panel">
+        <div class="figure-head">
+          <div>
+            <p class="figure-number">Figure 5</p>
+            <h2>Department salary distribution with selected-person overlay</h2>
+          </div>
+          <p class="figure-caption">
+            This view shows the full department distribution and where the selected person landed inside it.
+          </p>
+        </div>
+        <details class="calc-note">
+          <summary>How this figure was calculated</summary>
+          <p>Each annual box plot uses department base salaries converted into FY2025 dollars. The selected person is overlaid as a connected marker so the record can be read against the full departmental distribution for each year.</p>
+        </details>
+        <div id="person-distribution-chart" class="figure-plot figure-hero"></div>
+      </section>
+
+      <section class="paper-panel figure-panel">
+        <div class="figure-head">
+          <div>
+            <p class="figure-number">Figure 6</p>
+            <h2>Base salary and additional compensation through time</h2>
+          </div>
+          <p class="figure-caption">
+            The stacked bars separate base salary from posted additional compensation where SHSU released that information.
+          </p>
+        </div>
+        <details class="calc-note">
+          <summary>How this figure was calculated</summary>
+          <p>Base salary and posted extra compensation are converted into FY2025 dollars and stacked. Extra compensation is shown only where SHSU released a separate remuneration file for that fiscal year.</p>
+        </details>
+        <div id="person-comp-chart" class="figure-plot figure-wide"></div>
+      </section>
+
+      <section class="paper-panel figure-panel">
+        <div class="figure-head">
+          <div>
+            <p class="figure-number">Figure 7</p>
+            <h2>Standardized position across comparison groups</h2>
+          </div>
+          <p class="figure-caption">
+            The z-score view is a compact way to show how far a given record sits from each group's yearly center.
+          </p>
+        </div>
+        <details class="calc-note">
+          <summary>How this figure was calculated</summary>
+          <p>The modified z-score compares the selected base salary to the median of each group for that year, scaled by median absolute deviation. Values near 0 are close to the group center; larger positive or negative values are farther from that center.</p>
+        </details>
+        <div id="person-zscore-chart" class="figure-plot figure-wide"></div>
+      </section>
+
+      <section class="paper-panel table-panel">
+        <div class="figure-head">
+          <div>
+            <p class="section-kicker">Detailed Record</p>
+            <h2>Year-by-year memo table</h2>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>FY</th>
+                <th>Title</th>
+                <th>Base</th>
+                <th>Total</th>
+                <th>Real Base</th>
+                <th>Dept %</th>
+                <th>COSET %</th>
+                <th>SHSU %</th>
+                <th>Dept z</th>
+                <th>COSET z</th>
+                <th>SHSU z</th>
+                <th>Real Change</th>
+                <th>Monthly Base</th>
+              </tr>
+            </thead>
+            <tbody id="person-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="paper-panel prose-panel sources-panel">
+        <div class="figure-head">
+          <div>
+            <p class="section-kicker">Sources</p>
+            <h2>Public data used in this individual record</h2>
+          </div>
+        </div>
+        <ol class="source-list">
+          <li><a href="https://profiles.shsu.edu/sms049/Images/Salary.html">SHSU public salary and remuneration files</a>.</li>
+          <li><a href="https://api.bls.gov/publicAPI/v2/timeseries/data/">BLS CPI-U public API</a>, used to convert salary values into FY2025 dollars.</li>
+          <li><a href="https://collegescorecard.ed.gov/data/api/">U.S. Department of Education College Scorecard API</a>, used for institution-level faculty-salary benchmarks.</li>
+        </ol>
+      </section>
+
+      <footer class="footer-note">
+        <p id="footer-notes"></p>
+      </footer>
+    </div>
+
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <script src="data/analysis.js"></script>
+    <script src="site.js"></script>
+    <script src="person.js"></script>
+  </body>
+</html>

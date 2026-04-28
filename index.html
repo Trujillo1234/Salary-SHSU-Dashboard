@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Salary and Purchasing Power Memo | SHSU Math &amp; Statistics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="page-overview">
+    <div class="article-shell">
+      <header class="masthead">
+        <div>
+          <p class="journal-kicker">Working Research Memo</p>
+          <p class="journal-title">Salary and Purchasing Power in SHSU Mathematics and Statistics</p>
+        </div>
+        <nav class="mastnav">
+          <a class="active" href="index.html">Department Memo</a>
+          <a href="person.html">Individual Records</a>
+        </nav>
+      </header>
+
+      <section class="browser-warning" role="status">
+        <strong>If the charts or live summary are blank, open the standalone file or check the extracted folder.</strong>
+        The full dashboard needs <span>index.html</span>, the JavaScript files, and <span>data/analysis.js</span> in the same folder structure.
+        The one-file overview is <span>index-standalone.html</span>.
+      </section>
+
+      <section class="title-block">
+        <p class="section-kicker">Department Memo</p>
+        <h1>Salary, purchasing power, and retention in SHSU Mathematics and Statistics</h1>
+        <p class="byline">
+          This memo organizes public salary and compensation records for SHSU Mathematics and Statistics. The central questions are whether pay has held its purchasing power, how compensation is distributed, and how the department compares with SHSU, Texas peers, and national public-university benchmarks.
+        </p>
+      </section>
+
+      <section class="abstract-grid">
+        <article class="paper-panel abstract-panel">
+          <h2>Executive summary</h2>
+          <p id="abstract-copy">
+            The public SHSU salary files are treated here as a purchasing-power record, not only as a list of nominal salaries. The memo uses CPI-U to convert salary history into FY2025 dollars, then compares the math department with COSET, the full SHSU salary file, and public faculty-salary benchmarks for selected Texas and national peers. The latest salary file is FY26; the latest separate extra-compensation file is FY25.
+          </p>
+        </article>
+        <aside class="paper-panel search-panel">
+          <h2>Individual records</h2>
+          <div class="interactive-block">
+            <label class="field-label" for="person-search">Search for a department member</label>
+            <div class="search-row">
+              <input id="person-search" list="people-list" placeholder="Type a name" />
+              <button id="open-person" type="button">Open</button>
+            </div>
+            <datalist id="people-list"></datalist>
+            <a class="text-link-button" href="person.html?person=trujillo-timothy-o">Open Timothy Trujillo record</a>
+          </div>
+          <p id="coverage-summary" class="search-note"></p>
+        </aside>
+      </section>
+
+      <section class="metric-strip" id="metric-strip"></section>
+
+      <section class="paper-panel prose-panel">
+        <div class="figure-head">
+          <div>
+            <p class="section-kicker">Principal Findings</p>
+            <h2>Findings supported by the current salary files</h2>
+          </div>
+        </div>
+        <ol id="finding-list" class="finding-list">
+          <li><strong>Purchasing power.</strong> Inflation-adjusted median SHSU math base salary fell from $80,206 in FY2011 to $58,797 in FY2025, a real change of -26.7% in FY2025 dollars.</li>
+          <li><strong>Current roster.</strong> The latest SHSU math roster in the dataset is FY2026, with 58 employees and a median base salary of $50,949.</li>
+          <li><strong>Extra compensation.</strong> In FY2025, 5.4% of math-department employees received additional compensation beyond base salary.</li>
+          <li><strong>Texas comparison.</strong> Using the official 2024 College Scorecard/IPEDS monthly faculty-salary benchmark, SHSU's institution-wide figure was $8,196 per month versus a Texas peer median of $9,269.</li>
+          <li><strong>National comparison.</strong> Against the selected national public peers, SHSU's 2024 institution-wide monthly faculty salary was below the national peer median of $10,845.</li>
+          <li><strong>Large-record check.</strong> The highest total-compensation figure in the built dataset belongs to Holt, Melinda A. at $250,818.</li>
+        </ol>
+      </section>
+
+      <section class="paper-panel method-panel">
+        <div class="figure-head">
+          <div>
+            <p class="section-kicker">Method</p>
+            <h2>Three comparison layers</h2>
+          </div>
+        </div>
+        <div class="method-grid">
+          <article>
+            <h3>Purchasing power</h3>
+            <p>Base salary and total compensation are converted into FY2025 dollars when the question is whether pay kept up with inflation.</p>
+          </article>
+          <article>
+            <h3>Internal context</h3>
+            <p>The department is compared with COSET and the full SHSU salary file so the math record is not read in isolation.</p>
+          </article>
+          <article>
+            <h3>External benchmarks</h3>
+            <p>Texas and national peer lines use the College Scorecard/IPEDS monthly faculty-salary measure, which is institution-wide rather than department-specific.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="paper-panel prose-panel">
+        <div class="figure-head">
+          <div>
+            <p class="section-kicker">Scope</p>
+            <h2>Claims supported by this memo</h2>
+          </div>
+        </div>
+        <p>
+          The memo is descriptive. It reports public salary files, public additional-compensation files, CPI-U inflation adjustment, and official institution-level faculty-salary benchmarks. The dataset covers posted salary amounts, real-dollar purchasing power, percentile standing, modified z-scores, and selected public benchmark comparisons.
+        </p>
+        <p>
+          FY2026 is included in the salary roster as a nominal salary year. Separate additional-compensation files and complete inflation-adjusted comparisons currently run through FY2025. Real-dollar trend claims therefore use FY2025 as the latest comparable endpoint.
+        </p>
+      </section>
+
+      <section class="paper-panel figure-panel">
+        <div class="figure-head">
+          <div>
+            <p class="figure-number">Figure 1</p>
+            <h2>Inflation-adjusted department salary bands</h2>
+          </div>
+          <p class="figure-caption">
+            Salary bands are shown in FY2025 dollars so the figure tracks purchasing power rather than nominal pay.
+          </p>
+        </div>
+        <details class="calc-note">
+          <summary>How this figure was calculated</summary>
+          <p>Each annual base salary was converted to FY2025 dollars using CPI-U. The dark line is the department median; the inner band is the 25th to 75th percentile range, and the outer band is the 10th to 90th percentile range.</p>
+        </details>
+        <div id="figure-real-band" class="figure-plot figure-hero"></div>
+      </section>
+
+      <section class="paper-panel figure-panel">
+        <div class="figure-head">
+          <div>
+            <p class="figure-number">Figure 2</p>
+            <h2>Internal pay ladders across department, college, and university</h2>
+          </div>
+          <p class="figure-caption">
+            These lines come from SHSU's posted salary files: math only, COSET, and the full SHSU file.
+          </p>
+        </div>
+        <details class="calc-note">
+          <summary>How this figure was calculated</summary>
+          <p>For each fiscal year, the median annual base salary was calculated separately for the math department, COSET, and the full SHSU salary file, then converted into FY2025 dollars for purchasing-power comparison.</p>
+        </details>
+        <div id="figure-context-trend" class="figure-plot figure-hero"></div>
+      </section>
+
+      <section class="paper-panel figure-panel">
+        <div class="figure-head">
+          <div>
+            <p class="figure-number">Figure 3</p>
+            <h2>Total compensation and compensation reach</h2>
+          </div>
+          <p class="figure-caption">
+            This figure combines base salary with posted extra compensation in the years where SHSU released a separate remuneration file.
+          </p>
+        </div>
+        <details class="calc-note">
+          <summary>How this figure was calculated</summary>
+          <p>Total compensation equals posted base salary plus posted extra compensation. The left axis shows the department median total compensation in FY2025 dollars; the right axis shows the percentage of department records with any posted extra compensation.</p>
+        </details>
+        <div id="figure-comp-trend" class="figure-plot figure-hero"></div>
+      </section>
+
+      <section class="paper-panel figure-panel">
+        <div class="figure-head">
+          <div>
+            <p class="figure-number">Figure 4</p>
+            <h2>Yearly salary distribution shape</h2>
+          </div>
+          <p class="figure-caption">
+            The box plots show how the real salary distribution moved over time and make dispersion visible without a separate outlier list.
+          </p>
+        </div>
+        <details class="calc-note">
+          <summary>How this figure was calculated</summary>
+          <p>Each box uses individual department base salaries converted into FY2025 dollars. The box spans the middle 50% of salaries, the center line is the median, and suspected outliers follow the standard 1.5-IQR box-plot rule.</p>
+        </details>
+        <div id="figure-distribution" class="figure-plot figure-hero"></div>
+      </section>
+
+      <section class="paper-panel figure-panel">
+        <div class="figure-head">
+          <div>
+            <p class="figure-number">Figure 5</p>
+            <h2>Rank composition over time</h2>
+          </div>
+          <p class="figure-caption">
+            Rank mix is included because changes in composition materially affect the department median.
+          </p>
+        </div>
+        <details class="calc-note">
+          <summary>How this figure was calculated</summary>
+          <p>Each line segment is the share of the department roster in a rank group for that fiscal year. The shares are based on normalized title groupings such as Assistant Professor, Associate Professor, Professor, Lecturer, Visiting Faculty, and related groups.</p>
+        </details>
+        <div id="figure-rank-mix" class="figure-plot figure-wide"></div>
+      </section>
+
+      <section class="paper-panel figure-panel">
+        <div class="figure-head">
+          <div>
+            <p class="figure-number">Figure 6</p>
+            <h2>External benchmark trend</h2>
+          </div>
+          <p class="figure-caption">
+            The outside benchmark is the official College Scorecard/IPEDS monthly faculty salary for SHSU against selected Texas and national peers.
+          </p>
+        </div>
+        <details class="calc-note">
+          <summary>How this figure was calculated</summary>
+          <p>The SHSU line is the official institution-level monthly faculty-salary benchmark. Texas and national lines are medians across selected public peer institutions. These benchmarks are institution-wide, not math-department-specific.</p>
+        </details>
+        <div id="figure-peer-trend" class="figure-plot figure-hero"></div>
+      </section>
+
+      <section class="paper-panel prose-panel sources-panel">
+        <div class="figure-head">
+          <div>
+            <p class="section-kicker">Sources</p>
+            <h2>Public data used in this salary memo</h2>
+          </div>
+        </div>
+        <ol class="source-list">
+          <li><a href="https://profiles.shsu.edu/sms049/Images/Salary.html">SHSU public salary and remuneration files</a>.</li>
+          <li><a href="https://api.bls.gov/publicAPI/v2/timeseries/data/">BLS CPI-U public API</a>, used to convert salary values into FY2025 dollars.</li>
+          <li><a href="https://collegescorecard.ed.gov/data/api/">U.S. Department of Education College Scorecard API</a>, used for institution-level faculty-salary benchmarks.</li>
+        </ol>
+      </section>
+
+      <footer class="footer-note">
+        <p id="footer-notes"></p>
+      </footer>
+    </div>
+
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <script src="data/analysis.js"></script>
+    <script src="site.js"></script>
+    <script src="overview.js"></script>
+  </body>
+</html>
