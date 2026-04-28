@@ -33,6 +33,10 @@ function purchasingPowerSummarySentence(name, realChange, latestComparableVsPeak
     return `The public salary files show ${name}'s nominal base salary record, but a complete purchasing-power change is not computed for the available years.`;
   }
 
+  if (firstYearLabel === latestYearLabel) {
+    return `The public salary files contain one inflation-comparable math-department salary year for ${name}: ${latestYearLabel}. That record is shown in FY2025 dollars for context, but a multi-year purchasing-power trend is not computed from a single comparable year.`;
+  }
+
   const changeText = signedPct(realChange);
   let peakText = "";
   if (latestComparableVsPeak != null) {
@@ -66,7 +70,11 @@ function renderPersonHeader(person) {
   const lastComparable = [...person.years].reverse().find((row) => row.base_salary_real_fy2025 != null);
   const realChange = firstComparable && lastComparable ? (lastComparable.base_salary_real_fy2025 / firstComparable.base_salary_real_fy2025) - 1 : null;
   const comparableWindow =
-    firstComparable && lastComparable ? `from ${yearLabel(firstComparable.fiscal_year)} to ${yearLabel(lastComparable.fiscal_year)}` : "across the comparable years";
+    firstComparable && lastComparable && firstComparable.fiscal_year !== lastComparable.fiscal_year
+      ? `from ${yearLabel(firstComparable.fiscal_year)} to ${yearLabel(lastComparable.fiscal_year)}`
+      : firstComparable
+        ? `in ${yearLabel(firstComparable.fiscal_year)}`
+        : "across the comparable years";
   document.getElementById("profile-copy").textContent =
     `${name}'s salary record is shown in department, college, university, state, and national context. The latest observed nominal base salary is ${money(latest.base_salary)} in ${yearLabel(latest.fiscal_year)}. The real-salary figures convert annual base pay into FY2025 dollars, so the purchasing-power change ${comparableWindow} is ${signedPct(realChange)}.`;
 }
@@ -88,18 +96,27 @@ function renderPersonCaseSummary(person) {
   const latestComparableYearLabel = lastComparable ? yearLabel(lastComparable.fiscal_year) : "the latest comparable year";
   const firstComparableYearLabel = firstComparable ? yearLabel(firstComparable.fiscal_year) : "the first comparable year";
   const realPeakYearLabel = realPeak ? yearLabel(realPeak.fiscal_year) : "the peak comparable year";
+  const hasComparableTrend = firstComparable && lastComparable && firstComparable.fiscal_year !== lastComparable.fiscal_year;
+  const endpointReason =
+    latest.fiscal_year === lastComparable?.fiscal_year
+      ? `The latest comparable real-dollar endpoint is ${latestComparableYearLabel}.`
+      : `The latest comparable real-dollar endpoint is ${latestComparableYearLabel}, because FY2026 is included in the salary roster but does not yet have the same complete inflation and separate remuneration context used for FY2025 and earlier.`;
   const hasRecentFlatNominal =
     person.years.length >= 3 && person.years.slice(-3).every((row) => row.base_salary === latest.base_salary);
   const compComparableRows = person.years.filter((row) => row.compensation_data_available);
   const postedExtraComp = compComparableRows.reduce((sum, row) => sum + (row.extra_comp || 0), 0);
 
   document.getElementById("person-citable-copy").textContent =
-    `${purchasingPowerSummarySentence(name, realChange, latestComparableVsPeak, firstComparableYearLabel, latestComparableYearLabel, realPeakYearLabel)} The latest comparable real-dollar endpoint is ${latestComparableYearLabel}, because FY2026 is included in the salary roster but does not yet have the same complete inflation and separate remuneration context used for FY2025 and earlier.`;
+    `${purchasingPowerSummarySentence(name, realChange, latestComparableVsPeak, firstComparableYearLabel, latestComparableYearLabel, realPeakYearLabel)} ${endpointReason}`;
 
   const items = [
     `Nominal base salary moved from ${money(firstComparable?.base_salary)} in ${firstComparableYearLabel} to ${money(latest.base_salary)} in ${yearLabel(latest.fiscal_year)}.`,
-    `In real FY2025 dollars, base salary changed ${signedPct(realChange)} from ${firstComparableYearLabel} to ${latestComparableYearLabel}.`,
-    `${latestComparableYearLabel} real base salary was ${signedPct(latestComparableVsPeak)} relative to the observed real-salary peak in ${realPeakYearLabel}.`,
+    hasComparableTrend
+      ? `In real FY2025 dollars, base salary changed ${signedPct(realChange)} from ${firstComparableYearLabel} to ${latestComparableYearLabel}.`
+      : `The record has one inflation-comparable salary year, so a multi-year real-salary change is not computed.`,
+    hasComparableTrend
+      ? `${latestComparableYearLabel} real base salary was ${signedPct(latestComparableVsPeak)} relative to the observed real-salary peak in ${realPeakYearLabel}.`
+      : `${latestComparableYearLabel} is the only observed real-salary year in this department record.`,
     `In ${yearLabel(latest.fiscal_year)}, the record sits at ${pct(latest.department_base_salary_percentile)} inside the math-department salary file, ${pct(latest.college_base_salary_percentile)} inside COSET, and ${pct(latest.university_base_salary_percentile)} inside SHSU's full salary file.`,
     hasRecentFlatNominal
       ? `Nominal base salary is unchanged across ${person.years.slice(-3).map((row) => yearLabel(row.fiscal_year)).join(", ")} in the posted salary files.`
