@@ -1,41 +1,44 @@
-# SHSU Math Salary Memo
+# SHSU Math Salary Dashboard
 
-This project builds a local, print-friendly salary research site for Sam Houston State University's Mathematics and Statistics salary and compensation data.
+This repository contains the public GitHub Pages build for the SHSU Mathematics and Statistics salary dashboard.
 
-## What it includes
+Open the dashboard here:
 
-- SHSU math department salary history from the public salary files posted at `https://profiles.shsu.edu/sms049/Images/Salary.html`
-- Additional compensation where SHSU has posted separate remuneration files
-- Inflation-adjusted views using BLS CPI-U
-- Texas and national peer benchmarks using the official College Scorecard/IPEDS monthly faculty-salary measure
-- A department overview for salary, purchasing-power, compensation, and benchmark trends
-- An individual-record page for name-by-name analysis; `person.html` opens with Timothy Trujillo's record by default
-- A static printable salary memo in `pay-report.html`
-- A static printable anomalies memo in `anomalies-report.html`
+https://trujillo1234.github.io/Salary-SHSU-Dashboard/
 
-## How to rebuild the data
+## What Is Included
 
-Run:
+- `index.html`: department overview for salary, purchasing power, compensation, distribution, rank mix, and benchmark trends.
+- `person.html`: individual salary-record page. It opens with Timothy Trujillo's record by default and includes a search box for other department records.
+- `data/analysis.js`: generated dashboard dataset used by the site.
+- `styles.css` and JavaScript files for layout, search, charts, and print behavior.
 
-```powershell
-& "C:\Users\dutim\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" .\scripts\build_data.py
-```
+## What The Dashboard Covers
 
-That writes:
+- Public SHSU salary records for Mathematics and Statistics.
+- Posted additional compensation where SHSU released separate remuneration files.
+- Inflation-adjusted salary values in FY2025 dollars using CPI-U.
+- Department, COSET, and full-SHSU internal comparisons.
+- Texas and national public-university benchmark context using institution-level College Scorecard/IPEDS monthly faculty salary data.
+- Percentiles, modified z-scores, and box-plot outlier markers for descriptive context.
 
-- `data/analysis.json`
-- `data/analysis.js`
-- `data/shsu_math_records.csv`
-- `data/peer_benchmarks.csv`
+## Important Notes
 
-## How to open the dashboard
+- The dashboard is descriptive and uses public records.
+- FY2026 salary records are included, but the latest separate additional-compensation file currently available in the source data is FY2025.
+- Outlier markers use the standard 1.5-IQR box-plot rule within each fiscal year. They do not by themselves indicate an error or an all-time maximum.
+- External peer benchmarks are institution-wide faculty salary measures, not math-department-specific measures.
 
-Open [index.html](./index.html) for the department overview.
+## How The Site Is Hosted
 
-Open [person.html](./person.html) for the person-specific record page. By default, it opens Timothy Trujillo's record; use the search box to open another employee record.
+This is a static site. GitHub Pages serves the HTML, CSS, JavaScript, and generated data files directly from this repository. No server-side code is required to view the dashboard.
 
-Open [pay-report.html](./pay-report.html) for the static salary memo and [anomalies-report.html](./anomalies-report.html) for the static anomalies memo.
+## Printing
 
-The page loads the built dataset from `data/analysis.js`, so it does not require a local web server.
+Use the browser print command to save the dashboard pages as PDFs. The print stylesheet hides interactive controls and resizes figures/tables for cleaner PDF output.
 
-Use the browser's print command to save any page as a PDF. The print stylesheet hides interactive controls, resizes charts, and fits wide tables to the printed page.
+## Public Data Sources
+
+- SHSU public salary and remuneration files: https://profiles.shsu.edu/sms049/Images/Salary.html
+- BLS Consumer Price Index: https://www.bls.gov/cpi/
+- College Scorecard data: https://collegescorecard.ed.gov/data/
