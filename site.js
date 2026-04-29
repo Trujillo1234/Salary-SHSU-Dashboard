@@ -21,6 +21,10 @@ const signedPct = (value, digits = 1) => (value == null ? "n/a" : `${value > 0 ?
 
 const people = dataset.people.slice().sort((a, b) => a.name.localeCompare(b.name));
 const peopleBySlug = Object.fromEntries(people.map((person) => [person.slug, person]));
+const personSlugAliases = {
+  "noorzahan-farzana": "hafeez-farzana",
+  "wathurawa-manage-ananda-b": "manage-ananda-b",
+};
 const yearSummaries = dataset.year_summaries.slice().sort((a, b) => a.fiscal_year - b.fiscal_year);
 const contextSummaries = dataset.context_summaries;
 const latestYear = Math.max(...yearSummaries.map((row) => row.fiscal_year));
@@ -155,7 +159,8 @@ function displayPersonName(person) {
 
 function findPersonFromQuery() {
   const params = new URLSearchParams(window.location.search);
-  const slug = params.get("person");
+  const requestedSlug = params.get("person");
+  const slug = personSlugAliases[requestedSlug] || requestedSlug;
   if (slug && peopleBySlug[slug]) {
     return peopleBySlug[slug];
   }
